@@ -1,0 +1,29 @@
+<metal:main use-macro="load: layout.pt">
+  <div metal:fill-slot="content">
+    <h1>Add your content</h1>
+    <form action="${request.route_path('addContent')}" method="POST">
+      <div class="row">
+	<lablel class="span3" for="title">
+	  Title
+	</lablel>
+	<input type="text" id="title" name="title" />
+      </div>
+      <div class="row">
+	<label class="span3" for="content">
+	  Content :
+	</label>
+	<textarea name='content' id='content'>
+	</textarea>
+      </div>
+      <div class="row">
+	<label class="span3" for="type">type source</label>
+	<select class="span4" name="type" id='type'>
+	  <option tal:repeat="lexer lexers" value="${lexer[1]}">${lexer[0]}</option>
+	</select>
+      </div>
+      <div class='row'>
+	<input type="submit" value="submit" />
+      </div>
+    </form>
+  </div>
+</metal:main>
