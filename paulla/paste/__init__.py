@@ -5,8 +5,6 @@ from pyramid_beaker import set_cache_regions_from_settings
 from pyramid.threadlocal import get_current_registry
 
 
-from paulla.paste.xml_renderer import xml_render_factory
-
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
@@ -25,6 +23,6 @@ def main(global_config, **settings):
     config.add_route('oneContentRaw', '/{idContent}/raw')
     config.add_fanstatic_resources([resource.strip() for resource in settings['resources'].split(',')]
                                    , r'.*\.pt')
-    config.add_renderer('xml', xml_render_factory)
+
     config.scan()
     return config.make_wsgi_app()
