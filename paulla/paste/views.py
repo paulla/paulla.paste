@@ -24,7 +24,7 @@ server = couchdbkit.Server(settings['couchdb.url'])
 db = server.get_or_create_db(settings['couchdb.db'])
 Paste.set_db(db)
 
-
+formatter = HtmlFormatter(linenos=True, full=True, cssclass="source")
 
 @view_config(route_name='home', renderer='templates/home.pt')
 def home(request):
@@ -45,10 +45,8 @@ def add(request):
 def content(request):
     paste = Paste.get(request.matchdict['idContent'])
     lexer = get_lexer_by_name(paste.typeContent, stripall=True)
-    formatter = HtmlFormatter(linenos=True, full=True, cssclass="source")
 
     result = highlight(paste['content'], lexer, formatter)
-
 
     return {'paste': paste,
             'content': result,}
@@ -69,7 +67,6 @@ def lexers():
     result = [(lexer[0], lexer[1][0]) for lexer in get_all_lexers()]
     result.sort()
     return result
-
 
 @subscriber(NewRequest)
 def previousEvent(event):
