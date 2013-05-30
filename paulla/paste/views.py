@@ -49,18 +49,14 @@ def content(request):
 
     result = highlight(paste['content'], lexer, formatter)
 
+
     return {'paste': paste,
-            'content':result,}
+            'content': result,}
 
-@view_config(route_name='oneContentRaw', renderer='json', accept='application/json')
-def contentRawJson(request):
-    paste = Paste.get(request.matchdict['idContent'])
-    return paste.content
-
-@view_config(route_name='oneContentRaw', renderer='xml', accept='application/xml')
+@view_config(route_name='oneContentRaw', renderer='string', )
 def contentRawXml(request):
     paste = Paste.get(request.matchdict['idContent'])
-    return '<xml>'+paste.content+'</xml>'
+    return paste.content
 
 
 @cache_region('short_term', 'previous')

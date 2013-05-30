@@ -2,6 +2,5 @@
   <div metal:fill-slot="content">
     <h1>${paste.title}</h1>
     ${structure: content}
-
   </div>
 </metal:main>
