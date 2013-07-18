@@ -1,1 +1,0 @@
-paulla.paste README
