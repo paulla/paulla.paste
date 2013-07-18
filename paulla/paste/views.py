@@ -51,9 +51,10 @@ def content(request):
     return {'paste': paste,
             'content': result,}
 
-@view_config(route_name='oneContentRaw', renderer='string', )
-def contentRawXml(request):
+@view_config(route_name='oneContentRaw', renderer='string' )
+def contentRaw(request):
     paste = Paste.get(request.matchdict['idContent'])
+    # TODO type/mime
     return paste.content
 
 
