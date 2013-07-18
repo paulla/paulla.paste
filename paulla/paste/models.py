@@ -1,4 +1,6 @@
 import couchdbkit
+
+
 class Paste(couchdbkit.Document):
     title = couchdbkit.StringProperty()
     content = couchdbkit.StringProperty()
