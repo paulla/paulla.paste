@@ -37,7 +37,7 @@ def add(request):
                   created=datetime.datetime.now(),
                   typeContent=request.POST['type'])
     paste.save()
-    request.session.flash(u"Add ok")
+    request.session.flash(u"Add ok") # TODO translatoion
     return HTTPFound(request.route_path('oneContent', idContent=paste._id))
 
 
