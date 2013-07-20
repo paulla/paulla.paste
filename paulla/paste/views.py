@@ -164,3 +164,7 @@ def delete(request):
     request.session.flash(u"Wrong password") # TODO translatoion
 
     return HTTPFound(request.route_path('deleteConfirm', idContent=paste._id))
+
+@view_config(route_name='rss2', renderer='templates/rss2.pt')
+def rss2(request):
+    return {'pastes': previous()}

@@ -27,6 +27,8 @@ def main(global_config, **settings):
     config.add_route('deleteConfirm', '/{idContent}/deleteConfirm')
     config.add_route('delete', '/{idContent}/delete')
 
+    config.add_route('rss2', '/feeds/rss2')
+
     config.add_fanstatic_resources([resource.strip() for resource in settings['resources'].split(',')]
                                    , r'.*\.pt')
 
