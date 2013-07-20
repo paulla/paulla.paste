@@ -1,0 +1,27 @@
+<metal:main
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+
+    use-macro="load: layout.pt">
+  <div metal:fill-slot="content" class="row">
+    <h1 i18n:translate=''>Delete this paste ?</h1>
+    <h2 class="row">${paste.title}</h2>
+    <div class="row">
+    ${structure: content}
+    </div>
+
+    <form action="${request.route_path('delete',idContent=paste._id)}" method="POST">
+      <div class="row">
+	<lablel class="span3" for="title" i18n:translate=''>
+	  password
+	</lablel>
+	<input type="text" id="password" name="password" />
+      </div>
+      <div class="row">
+	<input class="span3" type="submit" />
+      </div>
+    </form>
+
+  </div>
+</metal:main>

@@ -128,3 +128,39 @@ def update(request):
     request.session.flash(u"Wrong password") # TODO translatoion
 
     return HTTPFound(request.route_path('edit', idContent=paste._id))
+
+
+@view_config(route_name='deleteConfirm', renderer='templates/delete_confirm.pt')
+def deleteConfirm(request):
+    paste = Paste.get(request.matchdict['idContent'])
+
+    if not(paste.username and paste.password):
+        return HTTPFound(request.route_path('oneContent', idContent=paste._id))
+
+    lexer = get_lexer_by_name(paste.typeContent, stripall=True)
+
+    result = highlight(paste['content'], lexer, formatter)
+
+    return {'paste': paste,
+            'content': result,}
+
+
+@view_config(route_name='delete')
+def delete(request):
+    paste = Paste.get(request.matchdict['idContent'])
+
+    password = _buildPassword(paste.username,
+                              paste.created,
+                              request.POST['password'])
+
+    if password == paste.password:
+
+        paste.delete()
+
+        request.session.flash(u"Deleted") # TODO translatoion
+
+        return HTTPFound(request.route_path('home', ))
+
+    request.session.flash(u"Wrong password") # TODO translatoion
+
+    return HTTPFound(request.route_path('deleteConfirm', idContent=paste._id))

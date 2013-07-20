@@ -24,6 +24,9 @@
       Edit
     </a>
 
+    <a class="row" tal:condition="paste.username and paste.password" href="${request.route_path('deleteConfirm', idContent=paste._id)}" i18n:translate=''>
+      Delete
+    </a>
   </div>
 
 </metal:main>
