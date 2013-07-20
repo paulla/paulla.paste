@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: paulla.paste 0.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-07-18 22:36+0200\n"
+"POT-Creation-Date: 2013-07-20 09:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,22 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
+
+#: paulla/paste/templates/home.pt:8
+msgid "Add your content"
+msgstr ""
+
+#: paulla/paste/templates/home.pt:11
+msgid "Title"
+msgstr ""
+
+#: paulla/paste/templates/home.pt:17
+msgid "Content :"
+msgstr ""
+
+#: paulla/paste/templates/home.pt:24
+msgid "type source"
+msgstr ""
 
 #: paulla/paste/templates/layout.pt:32
 msgid "new"
