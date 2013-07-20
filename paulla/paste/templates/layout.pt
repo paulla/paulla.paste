@@ -11,6 +11,7 @@
     <meta name="keywords" content="python web application" />
     <meta name="description" content="pyramid web application" />
     <link rel="shortcut icon" href="${request.static_url('paulla.paste:static/favicon.ico')}" />
+    <link rel="alternate" href="${request.route_url('rss2')}" title="paulla.paste rss2" type="application/rss+xml" />
   </head>
   <body>
     <div class="container-fluid"
