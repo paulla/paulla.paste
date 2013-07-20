@@ -1,5 +1,7 @@
-import couchdbkit
+import hashlib
 import datetime
+
+import couchdbkit
 
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
@@ -30,14 +32,37 @@ formatter = HtmlFormatter(linenos=True, full=True, cssclass="source")
 def home(request):
     return {'lexers': lexers()}
 
+def _buildPassword(username, createdTime, password):
+    """
+    """
+    tmp = ''.join((username, str(createdTime), password, settings['salt']))
+
+    sha1 = hashlib.sha224()
+    sha1.update(tmp)
+
+    return sha1.hexdigest()
+
 @view_config(route_name='addContent', renderer='json')
 def add(request):
+
+    username = request.POST['username']
+    password = ''
+
+    now = datetime.datetime.now()
+
+    if username:
+      password = _buildPassword(username, now, password)
+
     paste = Paste(title=request.POST['title'],
                   content=request.POST['content'],
-                  created=datetime.datetime.now(),
-                  typeContent=request.POST['type'])
+                  created=now,
+                  typeContent=request.POST['type'],
+                  username=username,
+                  password=password)
     paste.save()
+
     request.session.flash(u"Add ok") # TODO translatoion
+
     return HTTPFound(request.route_path('oneContent', idContent=paste._id))
 
 
