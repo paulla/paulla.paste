@@ -26,6 +26,18 @@
 	  <option tal:repeat="lexer lexers" value="${lexer[1]}">${lexer[0]}</option>
 	</select>
       </div>
+      <div class="row">
+	<label class="span3" for="username" i18n:translate=''>
+	  Username
+	</label>
+	<input type="text" id="username" name="username" />
+      </div>
+      <div class="row">
+	<label class="span3" for="password" i18n:translate=''>
+	  Password
+	</label>
+	<input type="text" id="password" name="password" />
+      </div>
       <div class='row'>
 	<input type="submit" value="submit" />
       </div>
