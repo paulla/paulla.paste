@@ -21,6 +21,9 @@ def main(global_config, **settings):
     config.add_route('addContent', '/add')
     config.add_route('oneContent', '/{idContent}')
     config.add_route('oneContentRaw', '/{idContent}/raw')
+    config.add_route('update', '/{idContent}/update')
+    config.add_route('edit', '/{idContent}/edit')
+
     config.add_fanstatic_resources([resource.strip() for resource in settings['resources'].split(',')]
                                    , r'.*\.pt')
 

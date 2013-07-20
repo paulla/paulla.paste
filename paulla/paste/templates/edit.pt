@@ -1,0 +1,45 @@
+<metal:main
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    use-macro="load: layout.pt">
+
+  <div metal:fill-slot="content">
+    <h1 i18n:translate=''>Edit your content</h1>
+    <form action="${request.route_path('update',idContent=paste._id)}" method="POST">
+      <div class="row">
+	<lablel class="span3" for="title" i18n:translate=''>
+	  Title
+	</lablel>
+	<input type="text" id="title" name="title" value='${paste.title}'/>
+      </div>
+      <div class="row">
+	<label class="span3" for="content" i18n:translate=''>
+	  Content :
+	</label>
+	<textarea name='content' id='content'>${paste.content}</textarea>
+      </div>
+      <div class="row">
+	<label class="span3" for="type" i18n:translate=''>type source</label>
+	<select class="span4" name="type" id='type'>
+	  <option tal:repeat="lexer lexers" value="${lexer[1]}">${lexer[0]}</option>
+	</select>
+      </div>
+      <div class="row">
+	<label class="span3" for="username" i18n:translate=''>
+	  Username
+	</label>
+	<span id="username" name="username" class='span3'>${paste.username}</span>
+      </div>
+      <div class="row">
+	<label class="span3" for="password" i18n:translate=''>
+	  Password
+	</label>
+	<input type="text" id="password" name="password" />
+      </div>
+      <div class='row'>
+	<input type="submit" value="submit" /> <!-- TODO: translation -->
+      </div>
+    </form>
+  </div>
+</metal:main>

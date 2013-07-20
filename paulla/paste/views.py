@@ -35,7 +35,10 @@ def home(request):
 def _buildPassword(username, createdTime, password):
     """
     """
-    tmp = ''.join((username, str(createdTime), password, settings['salt']))
+    if not password:
+        return ''
+
+    tmp = ''.join((username, str(createdTime).split('.')[0], password, settings['salt']))
 
     sha1 = hashlib.sha224()
     sha1.update(tmp)
@@ -97,3 +100,31 @@ def lexers():
 @subscriber(NewRequest)
 def previousEvent(event):
     event.request.previous = previous()
+
+@view_config(route_name='edit', renderer='templates/edit.pt')
+def edit(request):
+
+    paste = Paste.get(request.matchdict['idContent'])
+
+    return {'lexers': lexers(),
+            'paste': paste,}
+
+@view_config(route_name='update')
+def update(request):
+    paste = Paste.get(request.matchdict['idContent'])
+
+    password = _buildPassword(paste.username, paste.created, request.POST['password'])
+
+    if password == paste.password:
+        paste.title = request.POST['title']
+        paste.content = request.POST['content']
+
+        paste.save()
+
+        request.session.flash(u"Updated") # TODO translatoion
+
+        return HTTPFound(request.route_path('oneContent', idContent=paste._id))
+
+    request.session.flash(u"Wrong password") # TODO translatoion
+
+    return HTTPFound(request.route_path('edit', idContent=paste._id))
