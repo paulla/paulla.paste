@@ -1,6 +1,29 @@
-<metal:main use-macro="load: layout.pt">
-  <div metal:fill-slot="content">
-    <h1>${paste.title}</h1>
+<metal:main
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+
+    use-macro="load: layout.pt">
+  <div metal:fill-slot="content" class="row">
+    <h1 class="row">${paste.title}</h1>
+    <div class="row">
     ${structure: content}
+    </div>
+
+    <div tal:condition="paste.username and paste.password"  class="row">
+
+      <label for="author" class="span3" i18n:translate=''>
+	Author :
+      </label>
+      <span class="span5" id='author'>
+	${paste.username}
+      </span>
+    </div>
+
+    <a class="row" tal:condition="paste.username and paste.password" href="${request.route_path('edit', idContent=paste._id)}" i18n:translate=''>
+      Edit
+    </a>
+
   </div>
+
 </metal:main>

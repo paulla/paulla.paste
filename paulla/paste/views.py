@@ -54,7 +54,7 @@ def add(request):
     now = datetime.datetime.now()
 
     if username:
-      password = _buildPassword(username, now, password)
+      password = _buildPassword(username, now, request.POST['password'])
 
     paste = Paste(title=request.POST['title'],
                   content=request.POST['content'],
