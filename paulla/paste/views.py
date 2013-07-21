@@ -135,17 +135,25 @@ def previous():
 
 @cache_region('long_term', 'lexers')
 def lexers():
+    """
+    Return the list of the pigments lexers.
+    """
     result = [(lexer[0], lexer[1][0]) for lexer in get_all_lexers()]
     result.sort()
     return result
 
 @subscriber(NewRequest)
 def previousEvent(event):
+    """
+    subscriber of newRequest.
+    """
     event.request.previous = previous()
 
 @view_config(route_name='edit', renderer='templates/edit.pt')
 def edit(request):
-
+    """
+    Edit a paste.
+    """
     paste = Paste.get(request.matchdict['idContent'])
 
     return {'lexers': lexers(),
