@@ -36,6 +36,11 @@ formatter = HtmlFormatter(linenos=True, full=True, cssclass="source")
 
 @view_config(route_name='home', renderer='templates/home.pt')
 def home(request):
+    """
+    Home page.
+
+    first page to be called.
+    """
     return {'lexers': lexers()}
 
 def _buildPassword(username, createdTime, password):
