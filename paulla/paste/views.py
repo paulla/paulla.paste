@@ -45,6 +45,13 @@ def home(request):
 
 def _buildPassword(username, createdTime, password):
     """
+    Build sha1 of password.
+
+    :param username: username field of paste,
+    :param createdTime : datetime of creation the paste.
+    :param password: password to encrypt.
+
+    _buildPassword also use a salt defined in configuration file.
     """
     if not password:
         return ''
