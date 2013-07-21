@@ -232,4 +232,7 @@ def delete(request):
 
 @view_config(route_name='rss2', renderer='templates/rss2.pt')
 def rss2(request):
+    """
+    Yeah we have rss !
+    """
     return {'pastes': previous()}
