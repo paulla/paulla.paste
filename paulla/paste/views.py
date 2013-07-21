@@ -206,6 +206,12 @@ def deleteConfirm(request):
 
 @view_config(route_name='delete')
 def delete(request):
+    """
+    Delete a paste.
+
+    return to / if succed
+    return to deleteConfigm is fail.
+    """
     paste = Paste.get(request.matchdict['idContent'])
 
     password = _buildPassword(paste.username,
