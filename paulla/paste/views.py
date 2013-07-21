@@ -127,6 +127,9 @@ def contentRaw(request):
 
 @cache_region('short_term', 'previous')
 def previous():
+    """
+    Return the list of the 10 previous paste.
+    """
     previousPastes = Paste.view('paste/all',  limit=10).all()
     return previousPastes
 
