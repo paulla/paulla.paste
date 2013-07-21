@@ -18,11 +18,17 @@ from pygments.lexers import get_all_lexers
 
 from paulla.paste.models import Paste
 
-settings = get_current_registry().settings
-# server object
-server = couchdbkit.Server(settings['couchdb.url'])
 
-# create database
+settings = get_current_registry().settings
+
+expireChoice = {"never": None,
+                "1day": datetime.timedelta(days=1),
+                "1week": datetime.timedelta(days=7),
+                "1month": datetime.timedelta(days=31)
+                }
+
+# couchdb connection
+server = couchdbkit.Server(settings['couchdb.url'])
 db = server.get_or_create_db(settings['couchdb.db'])
 Paste.set_db(db)
 
@@ -51,7 +57,17 @@ def add(request):
     username = request.POST['username']
     password = ''
 
+
     now = datetime.datetime.now()
+    expire = request.POST['expire']
+
+    expireDate = None
+
+    if expire:
+        delta = expireChoice[expire]
+
+        if delta:
+            expireDate = now + delta
 
     if username:
       password = _buildPassword(username, now, request.POST['password'])
@@ -61,7 +77,8 @@ def add(request):
                   created=now,
                   typeContent=request.POST['type'],
                   username=username,
-                  password=password)
+                  password=password,
+                  expire=expireDate)
     paste.save()
 
     request.session.flash(u"Add ok") # TODO translatoion

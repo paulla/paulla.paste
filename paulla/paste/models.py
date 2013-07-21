@@ -5,6 +5,7 @@ class Paste(couchdbkit.Document):
     title = couchdbkit.StringProperty()
     content = couchdbkit.StringProperty()
     created = couchdbkit.DateTimeProperty()
-    user = couchdbkit.StringProperty()
+    expire = couchdbkit.DateTimeProperty()
+    username = couchdbkit.StringProperty()
     password = couchdbkit.StringProperty()
     typeContent = couchdbkit.StringProperty()
