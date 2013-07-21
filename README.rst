@@ -1,4 +1,4 @@
 paulla.paste
 ============
 
-paste make by paulla
+paste made by paulla

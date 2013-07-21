@@ -1,9 +1,10 @@
+# -*- coding: utf-8 -*-
 import os
 
 from setuptools import setup, find_packages
 
 here = os.path.abspath(os.path.dirname(__file__))
-README = open(os.path.join(here, 'README.txt')).read()
+README = open(os.path.join(here, 'README.rst')).read()
 CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
 
 requires = [
@@ -15,6 +16,8 @@ requires = [
     'couchdbkit',
     'pyramid_beaker',
     'Pygments',
+    'Babel',
+    'lingua',
     ]
 
 setup(name='paulla.paste',
@@ -27,7 +30,7 @@ setup(name='paulla.paste',
         "Topic :: Internet :: WWW/HTTP",
         "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
         ],
-      author='Cyprien Le Pannérer',
+      author=u'Cyprien Le Pannérer',
       author_email='cyplp@free.fr',
       url='',
       keywords='paste couchdb pyramid',
@@ -42,5 +45,11 @@ setup(name='paulla.paste',
       [paste.app_factory]
       main = paulla.paste:main
       """,
+      message_extractors = { "paulla":
+                             [
+             ('**.py',   'lingua_python', None ),
+             ('**.pt',   'lingua_xml', None ),
+
+            ]},
       )
 

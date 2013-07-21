@@ -2,6 +2,8 @@
 <html xml:lang="en"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+
       >
   <head>
     <title>paulla paste</title>
@@ -9,6 +11,7 @@
     <meta name="keywords" content="python web application" />
     <meta name="description" content="pyramid web application" />
     <link rel="shortcut icon" href="${request.static_url('paulla.paste:static/favicon.ico')}" />
+    <link rel="alternate" href="${request.route_url('rss2')}" title="paulla.paste rss2" type="application/rss+xml" />
   </head>
   <body>
     <div class="container-fluid"
@@ -27,7 +30,7 @@
       <div class="span3">
 	<ul class="nav nav-tabs nav-stacked">
 	  <li tal:condition='request.path != "/"'>
-	    <a href="${request.route_path('home')}">new</a>
+	    <a href="${request.route_path('home')}" i18n:translate=''>new</a>
 	  </li>
 	    <li tal:repeat="current request.previous">
 	      <a href="${request.route_path('oneContent', idContent=current._id)}">${current.title} </a>
