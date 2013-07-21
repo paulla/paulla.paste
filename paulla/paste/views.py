@@ -104,6 +104,9 @@ def add(request):
 
 @view_config(route_name='oneContent', renderer='templates/content.pt')
 def content(request):
+    """
+    Display a content Paste.
+    """
     paste = Paste.get(request.matchdict['idContent'])
     lexer = get_lexer_by_name(paste.typeContent, stripall=True)
 
