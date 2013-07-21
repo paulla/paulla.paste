@@ -161,6 +161,12 @@ def edit(request):
 
 @view_config(route_name='update')
 def update(request):
+    """
+    Updating a paste.
+
+    return to display if succed.
+    return to edit if fail.
+    """
     paste = Paste.get(request.matchdict['idContent'])
 
     password = _buildPassword(paste.username, paste.created, request.POST['password'])
