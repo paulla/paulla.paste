@@ -65,7 +65,11 @@ def _buildPassword(username, createdTime, password):
 
 @view_config(route_name='addContent', renderer='json')
 def add(request):
+    """
+    Adding a new content.
 
+    if ok return to the oneContent page.
+    """
     username = request.POST['username']
     password = ''
 
