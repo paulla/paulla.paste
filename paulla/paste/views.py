@@ -117,6 +117,9 @@ def content(request):
 
 @view_config(route_name='oneContentRaw', renderer='string' )
 def contentRaw(request):
+    """
+    Display a raw content paste.
+    """
     paste = Paste.get(request.matchdict['idContent'])
     # TODO type/mime
     return paste.content
