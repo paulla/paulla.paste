@@ -188,6 +188,9 @@ def update(request):
 
 @view_config(route_name='deleteConfirm', renderer='templates/delete_confirm.pt')
 def deleteConfirm(request):
+    """
+    Ask confirmation on delete.
+    """
     paste = Paste.get(request.matchdict['idContent'])
 
     if not(paste.username and paste.password):
