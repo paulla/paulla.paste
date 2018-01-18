@@ -130,7 +130,10 @@ def previous():
     """
     Return the list of the 10 previous paste.
     """
-    previousPastes = Paste.view('paste/all',  limit=10).all()
+    try:
+        previousPastes = Paste.view('paste/all',  limit=10).all()
+    except:
+        previousPastes = []
     return previousPastes
 
 @cache_region('long_term', 'lexers')

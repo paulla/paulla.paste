@@ -12,11 +12,21 @@ def main(global_config, **settings):
     set_cache_regions_from_settings(settings)
 
     config = Configurator(settings=settings)
+
+
+    config.include('pyramid_fanstatic')
+    config.include('pyramid_beaker')
+    config.include('rebecca.fanstatic')
+#    config.include('pyramid_rpc.xmlrpc')
+
+
     config.set_session_factory(sessionFactory)
+
 
     get_current_registry().settings = settings
 
     config.add_static_view('static', 'static', cache_max_age=3600)
+
 
     config.add_route('home', '/')
     config.add_route('addContent', '/add')
@@ -28,9 +38,9 @@ def main(global_config, **settings):
     config.add_route('delete', '/{idContent}/delete')
 
     config.add_route('rss2', '/feeds/rss2')
-
+    #import pdb; pdb.set_trace()
     config.add_fanstatic_resources([resource.strip() for resource in settings['resources'].split(',')]
-                                   , r'.*\.pt')
+                                    , r'.*\.pt')
 
     config.scan()
     return config.make_wsgi_app()
